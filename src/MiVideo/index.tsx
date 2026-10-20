@@ -6,6 +6,7 @@ import {
   staticFile,
   useVideoConfig,
 } from "remotion";
+import { FocusedVideo } from "./focus";
 import {
   EndCardOverlay,
   OpeningGraphic,
@@ -42,12 +43,21 @@ export const MiVideo: React.FC = () => {
           from={shot.from}
           durationInFrames={shot.durationInFrames}
         >
-          <Video
-            src={SOURCE}
-            trimBefore={Math.round(shot.srcStart * fps)}
-            muted
-            style={{ filter: GRADE[shot.type] }}
-          />
+          {shot.focus ? (
+            <FocusedVideo
+              src={SOURCE}
+              trimBefore={Math.round(shot.srcStart * fps)}
+              filter={GRADE[shot.type]}
+              keyframes={shot.focus}
+            />
+          ) : (
+            <Video
+              src={SOURCE}
+              trimBefore={Math.round(shot.srcStart * fps)}
+              muted
+              style={{ filter: GRADE[shot.type] }}
+            />
+          )}
         </Sequence>
       ))}
 

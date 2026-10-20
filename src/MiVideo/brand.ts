@@ -1,11 +1,11 @@
 import { loadFont } from "@remotion/fonts";
 import { staticFile } from "remotion";
 
-// Textos provisionales: confirmar nombre de la bebida y usuario de Instagram.
+// Pendiente de confirmar: usuario de Instagram.
 export const BRAND = {
   wordmark: "NOKO",
   titleSmall: "NOW SERVING",
-  titleBig: "NOKO",
+  titleBig: "MONO TITI",
   handle: "@NOKO",
 };
 

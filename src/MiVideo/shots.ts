@@ -14,13 +14,40 @@ export type Shot = {
   srcStart: number;
   // Duración en corcheas.
   eighths: number;
+  // Enfoque selectivo: zona nítida (elipse) y el resto desenfocado.
+  focus?: FocusKeyframe[];
+};
+
+// Posición del objeto enfocado, en % del encuadre, a `t` segundos del inicio
+// del plano.
+export type FocusKeyframe = {
+  t: number;
+  cx: number;
+  cy: number;
+  w: number;
+  h: number;
 };
 
 // A = persona a cámara, B = producto. Alternancia estricta como en la referencia.
 export const SHOTS: Shot[] = [
   { name: "Entrada en la calle", type: "A", srcStart: 0.05, eighths: 5 },
   { name: "Primer plano buscando", type: "A", srcStart: 1.75, eighths: 3 },
-  { name: "Hielo en el vaso", type: "B", srcStart: 3.2, eighths: 8 },
+  {
+    name: "Hielo en el vaso",
+    type: "B",
+    srcStart: 3.2,
+    eighths: 8,
+    // Vaso medido cada 0,25 s sobre el original (estilo.md §5).
+    focus: [
+      { t: 0, cx: 45, cy: 45, w: 48, h: 34 },
+      { t: 0.75, cx: 43, cy: 46, w: 50, h: 35 },
+      { t: 1.0, cx: 43, cy: 50, w: 48, h: 35 },
+      { t: 1.25, cx: 49, cy: 56, w: 51, h: 36 },
+      { t: 1.5, cx: 55, cy: 58, w: 50, h: 35 },
+      { t: 1.75, cx: 52, cy: 76, w: 54, h: 41 },
+      { t: 2.0, cx: 44, cy: 90, w: 65, h: 30 },
+    ],
+  },
   { name: "Reacción 1", type: "A", srcStart: 6.6, eighths: 3 },
   { name: "Vertido de leche", type: "B", srcStart: 10.2, eighths: 4 },
   { name: "Reacción 2", type: "A", srcStart: 12.6, eighths: 3 },
